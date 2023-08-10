@@ -1,0 +1,10 @@
+# locl terraform directory
+.terraform/*
+
+# terraform local state file
+*.tfstate
+*.tfstate.*
+
+# tf variable files
+*.tfvars
+
