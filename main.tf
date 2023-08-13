@@ -114,8 +114,8 @@ resource "aws_instance" "myapp-server" {
   #!/bin/bash
   sudo yum update -y && sudo yum install -y docker
   sudo systemctl start docker
-  sudo user usermode -aG docker ec2-user
-  docker run -p 8080:8080 nginx
+  sudo usermode -aG docker ec2-user
+  docker run -p 8080:80 nginx
   EOF
 
   tags = {
@@ -123,3 +123,6 @@ resource "aws_instance" "myapp-server" {
   }
 }
 
+output "ec2_instance_public_ip" {
+  value = resource.aws_instance.myapp-server.public_ip
+}
