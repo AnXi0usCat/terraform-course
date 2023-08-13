@@ -94,14 +94,18 @@ data "aws_ami" "latest-amazon-linux-image" {
 }
 
 resource "aws_instance" "myapp-server" {
-    ami = data.aws_ami.latest-amazon-linux-image.id
-    instance_type = var.instance_type
+  ami = data.aws_ami.latest-amazon-linux-image.id
+  instance_type = var.instance_type
 
-    subnet_id = resource.aws_subnet.myapp-subnet-1.id
-    vpc_security_group_ids = [resource.aws_security_group.myapp-sg.id]
-    availability_zone = var.avail_zone
+  subnet_id = resource.aws_subnet.myapp-subnet-1.id
+  vpc_security_group_ids = [resource.aws_security_group.myapp-sg.id]
+  availability_zone = var.avail_zone
 
-    associate_public_ip_address = true
+  associate_public_ip_address = true
+  key_name = "server-key-pair"
 
+  tags = {
+    Name: "${var.env_prefix}-igw"
+  }
 }
 
