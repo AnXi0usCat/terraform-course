@@ -2,13 +2,6 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-variable "vpc_cidr_block" {}
-variable "subnet_cidr_block" {}
-variable "avail_zone" {}
-variable "env_prefix" {}
-variable "my_ip_address" {}
-variable "instance_type" {}
-variable "public_key_location" {}
 
 resource "aws_vpc" "myapp-vpc" { 
   cidr_block = var.vpc_cidr_block
@@ -117,6 +110,3 @@ resource "aws_instance" "myapp-server" {
   }
 }
 
-output "ec2_instance_public_ip" {
-  value = aws_instance.myapp-server.public_ip
-}
